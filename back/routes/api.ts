@@ -1,6 +1,8 @@
 import express from "express";
+import dotenv from "dotenv";
 
 const router = express.Router();
+dotenv.config();
 
 router.get("/", async (_, res) => {
   try {
