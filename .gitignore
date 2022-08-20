@@ -1,7 +1,9 @@
 # compiled output
 /back/build
 /back/node_modules
+/back/.env
 /postgres_data
+
 
 # Logs
 logs
