@@ -23,9 +23,9 @@ router.get("/search", async (req, res) => {
 
     console.log(titlesToSearch);
 
-    return res.json(responseJson);
+    return res.json(titlesToSearch);
   } catch (error) {
-    throw error;
+    return res.status(400).send("playlist id missing");
   }
 });
 
