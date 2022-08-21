@@ -4,6 +4,10 @@ import dotenv from "dotenv";
 const router = express.Router();
 dotenv.config();
 
+router.get("/", (_, res) => {
+  res.status(200);
+});
+
 router.get("/search", async (req, res) => {
   const { id } = req.query;
 
