@@ -4,10 +4,6 @@ import dotenv from "dotenv";
 const router = express.Router();
 dotenv.config();
 
-router.get("/", (_, res) => {
-  res.status(200);
-});
-
 router.get("/search", async (req, res) => {
   const { id } = req.query;
 
@@ -27,6 +23,10 @@ router.get("/search", async (req, res) => {
   } catch (error) {
     return res.status(400).send("playlist id missing");
   }
+});
+
+router.get("*", (_, res) => {
+  return res.status(400).send("endpoint not available");
 });
 
 export default router;
