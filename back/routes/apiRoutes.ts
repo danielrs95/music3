@@ -13,13 +13,20 @@ router.get("/search", async (req, res) => {
       `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${id}&key=${process.env.API_KEY}`
     );
     const responseJson = await response.json();
-    const { items } = responseJson;
+    let { nextPageToken } = responseJson;
+    const responseItems: any[] = []
 
-    const titlesToSearch = items.map((item: any) => item.snippet.title);
+    while (nextPageToken) {
+      const nextResponse: any = await fetch(
+        // eslint-disable-next-line max-len
+        `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${id}&key=${process.env.API_KEY}&pageToken=${nextPageToken}`
+      )
+      const nextResponseJson = await nextResponse.json()
+      nextPageToken  = nextResponseJson.nextPageToken;
+      nextResponseJson.items.map((item: any ) => responseItems.push(item.snippet.title))
+    }
 
-    console.log(titlesToSearch);
-
-    return res.json(titlesToSearch);
+    return res.json(responseItems);
   } catch (error) {
     return res.status(400).send("playlist id missing");
   }
