@@ -28,6 +28,6 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': ['warn'],
     "no-unused-vars": "off",
-    'max-len': ["error", { "code": 120 }],
+    'max-len': ["warn", { "code": 120 }],
   },
 };
